@@ -4,11 +4,21 @@ const Scheme = mongoose.Schema;
 
 const productScheme = new Scheme({
     
-    id:{
+    _id:{
         type: Number,
         required: true,
         uniqe:true,
         trim:true
+    },
+
+    name:{
+        type:String,
+        required:true
+    },
+    
+    img:{
+        type:String,
+        required:false,
     },
 
     catagory:{
@@ -28,6 +38,18 @@ const productScheme = new Scheme({
         require:true
     },
 
+    size:{
+        type:String,
+        require:true,
+        trim:true
+    },
+
+    discription:{
+        type:String,
+        require:false,
+        trim:true
+    },
+
     discount:{
         type:Number,
         require:false
@@ -35,8 +57,9 @@ const productScheme = new Scheme({
 
     quantity:{
         type:Number,
-        required:false
+        required:true
     },
+
     updateAt :{
         type: Date,
         require: false
@@ -44,8 +67,9 @@ const productScheme = new Scheme({
     },
     {
         timestamps:true
-    }
+    },
+    
 )
 
-const Products = mongoose.model("product",productScheme)
-module.exports = productsModel
+const Products = mongoose.model("Product",productScheme)
+module.exports = Products
