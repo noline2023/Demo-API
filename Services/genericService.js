@@ -45,7 +45,26 @@ const dbServices = (model)=>{
         return newItem
     }
 
-    return {getAll,getByID,addAll,add}
+    /**
+   * updates a document in the collection
+   * @param {ObjectId} id
+   * @param {Object} object
+   * @returns
+   */
+    const update = async (id,object) =>{
+        return await model.findByIdAndUpdate(id,object)
+    }
+
+    /**
+   * deletes a document in the collection
+   * @param {ObjectId} id
+   * @returns
+   */
+  const remove = async (id) => {
+    return await model.findByIdAndRemove({_id: id});
+  };
+
+    return {getAll,getByID,addAll,add,update,remove}
 }
 
 module.exports = dbServices

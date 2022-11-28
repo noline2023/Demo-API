@@ -31,7 +31,9 @@ const PORT = process.env.PORT || 5000
 
 // Routers 
 const productRouter = require("./Route/ProductRouter")
+const orderRouter = require("./Route/OrderRouter")
 api.use("/product",productRouter)
+api.use("/order",orderRouter)
 
 
 api.get("/",(req,res) => {

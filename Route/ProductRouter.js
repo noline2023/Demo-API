@@ -115,7 +115,8 @@ router.put("/update/:id", async (req,res)=>{
  */
 
 router.delete("/delete/:id", async (req,res)=>{
-    res.send(`DELETING ${req.params.id}`)
+    result = await productController.removeProduct(req.params.id)
+    res.send(result)
 })
 
 module.exports = router

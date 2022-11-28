@@ -6,17 +6,17 @@ function getRandomFloat(min, max, decimals) {
     return parseFloat(str);
 }
 
-getAllProducts = async ()=> {
+const   getAllProducts = async ()=> {
     const product = await productService.getAll()
     return product
 } 
 
-getProductByID = async (id)=> {
+const getProductByID = async (id)=> {
    const product = await productService.getByID(id)
    return product
 }
 
-addProduct = async (p)=>{
+const addProduct = async (p)=>{
     let amount = getRandomFloat(1,10,0)
     let = product = {
         _id: p.id,
@@ -33,7 +33,7 @@ addProduct = async (p)=>{
 }
 
 // == ! Warning ! Do not use this function for we Cant restore the changes yet 
-addAllProducts = async (products)=>{ 
+const addAllProducts = async (products)=>{ 
 //     products.forEach(p => {
 //         let amount = getRandomFloat(1,10,0)
 //         filterdProducts.push({
@@ -53,5 +53,13 @@ addAllProducts = async (products)=>{
     return null
 }
 
+const updateProduct = async (id,product) =>{
+    return await productService.update(id,product)
+}
 
-module.exports = {getProductByID,addAllProducts,addProduct,getAllProducts}
+const removeProduct = async (id) =>{
+    return await productService.remove(id)
+}
+
+
+module.exports = {getProductByID,addAllProducts,addProduct,getAllProducts,updateProduct,removeProduct}
