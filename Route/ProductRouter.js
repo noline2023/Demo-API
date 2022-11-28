@@ -62,7 +62,6 @@ router.post("/add", async (req,res)=>{
     res.send(product)
 })
 
-
 /**
  * @swagger
  * /product/addAll:
