@@ -45,8 +45,6 @@ const dbServices = (model)=>{
         return newItem
     }
 
-
-
     return {getAll,getByID,addAll,add}
 }
 

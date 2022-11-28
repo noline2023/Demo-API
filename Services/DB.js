@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
-function connectDB(){
+const  connectDB = () => {
 
     const uri  = process.env.DATA_BASE_URI
     mongoose.connect(uri)
