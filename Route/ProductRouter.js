@@ -1,6 +1,6 @@
 const express =require('express')
 const router = express.Router()
-const products = require("../products")
+const products = require("../Assets/products")
 const productController = require("../Controller/ProductController")
 /**
  * @swagger
