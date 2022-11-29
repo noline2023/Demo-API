@@ -20,7 +20,7 @@ const orderController = require("../Controller/OrderController")
  *                  descroption: Success
  */
 router.get("/", async (req,res)=>{
-    const result = await orderController.getAllProducts()
+    const result = await orderController.getAllOrders()
     res.json(result)
 })
 
@@ -39,7 +39,7 @@ router.get("/", async (req,res)=>{
  *                  descroption: Success
  */
 router.get("/:id", async (req,res)=>{
-    const result = await orderController.getProductByID(req.params.id)
+    const result = await orderController.getOrderByID(req.params.id)
     res.json(result)
 })
 
@@ -54,8 +54,8 @@ router.get("/:id", async (req,res)=>{
  *                  descroption: Success
  */
 router.post("/add", async (req,res)=>{
-    const product = await orderController.addProduct()
-    res.send(product)
+    const product = await orderController.addOrder()
+    res.json(product)
 })
 
 /**
@@ -73,7 +73,7 @@ router.post("/add", async (req,res)=>{
  *                  descroption: Success
  */
 router.delete("/delete/:id", async (req,res)=>{
-    result = await orderController.removeProduct(req.params.id)
+    result = await orderController.removeOrder(req.params.id)
     res.send(result)
 })
 

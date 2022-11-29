@@ -13,4 +13,13 @@ const getOrderByID = async (id)=> {
    return product
 }
 
-module.exports = {getAllOrders,getOrderByID}
+const addOrder = async (order)=>{
+    return await orderService.add(order)
+}
+
+
+const removeOrder = async(id)=>{
+    return await orderService.remove(id)
+}
+
+module.exports = {getAllOrders,getOrderByID,addOrder,removeOrder}
