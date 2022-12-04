@@ -12,7 +12,7 @@ const orderScheme = new Scheme({
     },
 
     order_id:{
-        type:Number,
+        type:String,
         require:true,
         uniqe:true,
         trim:true,

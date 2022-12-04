@@ -54,8 +54,9 @@ router.get("/:id", async (req,res)=>{
  *                  descroption: Success
  */
 router.post("/add", async (req,res)=>{
-    const product = await orderController.addOrder()
-    res.json(product)
+    console.log(req.body)
+    const order =  orderController.addOrder(req.body)
+    res.status(200).json(order)
 })
 
 /**

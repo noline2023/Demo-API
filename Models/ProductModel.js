@@ -59,7 +59,7 @@ const productScheme = new Scheme({
         type:Number,
         required:true
     },
-
+    
     updateAt :{
         type: Date,
         require: false
