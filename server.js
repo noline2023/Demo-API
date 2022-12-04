@@ -20,13 +20,14 @@ const options ={
                 url:"http://localhost:5000"
             }
         ]
-    },
+    },  
     apis:["./Route/*.js"]
 }
 const specs = swaggerJsDoc(options)
 
 const api = express()
 api.use("/api-docs",swaggerUI.serve,swaggerUI.setup(specs))
+api.use(cors())
 const PORT = process.env.PORT || 5000
 
 // Routers 

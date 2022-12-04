@@ -11,7 +11,7 @@ const productController = require("../Controller/ProductController")
 
 /**
  * @swagger
- * /product:
+ * /product/all:
  *      get:
  *          summary: Returns All Products
  *          tags: [Products]
@@ -21,7 +21,7 @@ const productController = require("../Controller/ProductController")
  *                  descroption: Success
  */
 
-router.get("/", async (req,res)=>{
+router.get("/all", async (req,res)=>{
     const result = await productController.getAllProducts()
     res.json(result)
 })
@@ -58,7 +58,7 @@ router.get("/:id", async (req,res)=>{
  */
 
 router.post("/add", async (req,res)=>{
-    const product = await productController.addProduct(products[2])
+    const product = await productController.addProduct(products[0])
     res.send(product)
 })
 
