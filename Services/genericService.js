@@ -52,7 +52,7 @@ const dbServices = (model)=>{
    * @returns
    */
     const update = async (id,object) =>{
-        return await model.findByIdAndUpdate(id,object)
+        return await model.findByIdAndUpdate({_id:id},object,{new:true})
     }
 
     /**

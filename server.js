@@ -24,6 +24,7 @@ const options ={
     },  
     apis:["./Route/*.js"]
 }
+
 const specs = swaggerJsDoc(options)
 
 const api = express()

@@ -1,5 +1,6 @@
 const express =require('express')
 const router = express.Router()
+const productController = require("../Controller/ProductController")
 const orderController = require("../Controller/OrderController")
 /**
  * @swagger
@@ -54,9 +55,10 @@ router.get("/:id", async (req,res)=>{
  *                  descroption: Success
  */
 router.post("/add", async (req,res)=>{
-    console.log(req.body)
-    const order =  orderController.addOrder(req.body)
-    res.status(200).json(order)
+    const result = req.body
+    // const order =  orderController.addOrder(req.body)
+    const updated = await productController.updateProductQuantity(req.body._id)
+    updated ? res.sendStatus(200):res.send("Product is not listed")
 })
 
 /**

@@ -6,7 +6,7 @@ function getRandomFloat(min, max, decimals) {
     return parseFloat(str);
 }
 
-const   getAllProducts = async ()=> {
+const getAllProducts = async ()=> {
     const product = await productService.getAll()
     return product
 } 
@@ -15,6 +15,23 @@ const getProductByID = async (id)=> {
    const product = await productService.getByID(id)
    return product
 }
+
+const updateProductQuantity = async (productID) =>{
+    let res = await productService.getByID(productID)
+    let quantity = parseInt(res.quantity)-1
+    res.quantity= quantity
+    if (res.quantity>0){
+        const result = await productService.update(productID,{quantity:quantity})
+        return true
+    }
+    else{
+        await productService.remove(productID)
+        return false
+    }
+
+    
+}
+
 
 const addProduct = async (p)=>{
     let amount = getRandomFloat(1,10,0)
@@ -62,4 +79,4 @@ const removeProduct = async (id) =>{
 }
 
 
-module.exports = {getProductByID,addAllProducts,addProduct,getAllProducts,updateProduct,removeProduct}
+module.exports = {getProductByID,addAllProducts,addProduct,getAllProducts,updateProduct,removeProduct,updateProductQuantity}
