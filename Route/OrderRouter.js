@@ -46,6 +46,27 @@ router.get("/:id", async (req,res)=>{
 
 /**
  * @swagger
+ * /order/item/{id}:
+ *      get:
+ *          summary: Check if the item is in the store Purcheses History
+ *          tags: [Order History]
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                required: true
+ *          responses:
+ *              200:
+ *                  descroption: Success
+ */
+
+router.get("/item/:id",async(req,res)=>{
+    const result = await orderController.checkItemPayed(req.params.id);
+    res.send(result)
+
+})
+
+/**
+ * @swagger
  * /order/add:
  *      post:
  *          summary: ADD Order
@@ -55,10 +76,20 @@ router.get("/:id", async (req,res)=>{
  *                  descroption: Success
  */
 router.post("/add", async (req,res)=>{
-    const result = req.body
-    // const order =  orderController.addOrder(req.body)
-    const updated = await productController.updateProductQuantity(req.body._id)
-    updated ? res.sendStatus(200):res.send("Product is not listed")
+    let status;
+    let error;
+    try{    
+        const order =  await orderController.addOrder(req.body)
+        const updated = await productController.updateProductQuantity(req.body._id)
+        res.sendStatus(200)
+    }
+    catch(err){
+        res.sendStatus(400)
+    }
+
+
+
+
 })
 
 /**

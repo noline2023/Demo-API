@@ -26,6 +26,7 @@ const dbServices = (model)=>{
     const add = async(object)=>{
         const newObject = new model(object)
         return await newObject.save();
+
     }
 
     /**
@@ -34,15 +35,18 @@ const dbServices = (model)=>{
      * @returns {Promise<*>} Promise
      */
     const addAll = async (objectsArray) => {
+
         const newItem = model.collection.insertMany(objectsArray,(err,document)=>{
             if(err){
-                return console.error(err)
+                console.log(err)
+                return err
             }
             else{
                 console.log("Inserted To DB succesfuly!")
             }
         })
         return newItem
+
     }
 
     /**

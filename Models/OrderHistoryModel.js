@@ -1,21 +1,21 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Products = require('./ProductModel');
 
 const Scheme = mongoose.Schema;
 
 const orderScheme = new Scheme({
     
-    _id:{
-        type: Number,
-        required: true,
-        uniqe:true,
-        trim:true
-    },
 
-    order_id:{
+    _id:{
         type:String,
         require:true,
         uniqe:true,
         trim:true,
+    },
+
+    productID:{
+        type:[Number],
+        require:true,
     },
 
     updateAt :{

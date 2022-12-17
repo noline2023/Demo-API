@@ -18,7 +18,7 @@ const getProductByID = async (id)=> {
 
 const updateProductQuantity = async (productID) =>{
     let res = await productService.getByID(productID)
-    let quantity = parseInt(res.quantity)-1
+    let quantity = parseInt(res.quantity)+1
     res.quantity= quantity
     if (res.quantity>0){
         const result = await productService.update(productID,{quantity:quantity})
