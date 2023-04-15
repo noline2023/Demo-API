@@ -1,5 +1,5 @@
 const productService = require("../Services/productService")
-let filterdProducts = []
+let filterdProducts = require('../Assets/products')
 
 function getRandomFloat(min, max, decimals) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
@@ -66,9 +66,10 @@ const addAllProducts = async (products)=>{
 //         })
 //     });
 
-//    return await productService.addAll(filterdProducts)
+//    const respo = await productService.addAll(filterdProducts)
     return null
 }
+// addAllProducts(filterdProducts);
 
 const updateProduct = async (id,product) =>{
     return await productService.update(id,product)
