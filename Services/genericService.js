@@ -68,7 +68,11 @@ const dbServices = (model)=>{
     return await model.findByIdAndRemove({_id: id});
   };
 
-    return {getAll,getByID,addAll,add,update,remove}
+  const removeAll = async () =>{
+    return await model.deleteMany(console.log("Deleted"))
+  }
+
+    return {getAll,getByID,addAll,add,update,remove,removeAll}
 }
 
 module.exports = dbServices

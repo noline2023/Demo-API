@@ -2,6 +2,9 @@ const express =require('express')
 const router = express.Router()
 const productController = require("../Controller/ProductController")
 const orderController = require("../Controller/OrderController")
+const EmitProductIDToSocket = require("../Services/SocketServer")
+
+
 /**
  * @swagger
  * tags:
@@ -69,7 +72,7 @@ router.get("/item/:id",async(req,res)=>{
  * @swagger
  * /order/add:
  *      post:
- *          summary: ADD Order
+ *          summary: ADD Orderr
  *          tags: [Order History] 
  *          responses:
  *              200:
@@ -80,15 +83,39 @@ router.post("/add", async (req,res)=>{
     let error;
     try{    
         const order =  await orderController.addOrder(req.body)
-        const updated = await productController.updateProductQuantity(req.body._id)
+        EmitProductIDToSocket(req.body._id)
+//        const updated = await productController.updateProductQuantity(req.body._id)
+        res.sendStatus(200)
+    }
+    catch(err){
+        console.log(err)
+        res.sendStatus(400)
+    }
+
+})
+
+/**
+ * @swagger
+ * /order/addAll:
+ *      post:
+ *          summary: ADD All Orderers
+ *          tags: [Order History] 
+ *          responses:
+ *              200:
+ *                  descroption: Success
+ */
+router.post("/addAll", async (req,res)=>{
+    let ordersList = req.body
+    try{    
+        const order =  await orderController.addAllOrderes(ordersList)
+        for(let i  =0 ;i<ordersList.length;i++){
+            EmitProductIDToSocket(ordersList[i]._id)
+        }
         res.sendStatus(200)
     }
     catch(err){
         res.sendStatus(400)
     }
-
-
-
 
 })
 
@@ -96,7 +123,7 @@ router.post("/add", async (req,res)=>{
  * @swagger
  * /order/delete/{id}:
  *      delete:
- *          summary: Get Order By ID
+ *          summary: Remove order by ID
  *          tags: [Order History]
  *          parameters:
  *              - in: path
@@ -110,5 +137,27 @@ router.delete("/delete/:id", async (req,res)=>{
     result = await orderController.removeOrder(req.params.id)
     res.send(result)
 })
+
+/**
+ * @swagger
+ * /order/deleteAll:
+ *      delete:
+ *          summary: Remove All Documents
+ *          tags: [Order History]
+ *          responses:
+ *              200:
+ *                  descroption: Success
+ */
+router.delete("/deleteAll", async (req,res)=>{
+    try{
+        result = await orderController.removeAllOrderes()
+        res.sendStatus(200)
+    }
+    catch(err){
+        res.sendStatus(400)
+    }
+})
+
+
 
 module.exports = router

@@ -32,9 +32,46 @@ const addOrder = async (order)=>{
         productID: idArray,
         updateAt: new Date().toDateString()
     }
-    const addOrderPromise = await orderService.add(newOrder);
-    const purchesPromise = await purchesesService.add({_id:order._id})
-    return purchesPromise
+    console.log(order._id)
+    try{
+        const addOrderPromise = await orderService.add(newOrder);
+        const purchesPromise = await purchesesService.add({_id:order._id})
+        return addOrderPromise
+    }
+    catch(e){
+        console.log(e)
+        return e
+    }
+}
+
+
+const addAllOrderes = async (order)=>{
+
+    let idArray = []
+    for(let i = 0 ; i< order.length;i++){
+        idArray.push(order[i]._id)
+    }
+    order_id = uuidv4.v4()
+
+    newOrder = {
+        _id: order_id,
+        productID: idArray,
+        updateAt: new Date().toDateString()
+    }
+    console.log(order._id)
+    try{
+        const addOrderPromise = await orderService.add(newOrder);
+        const purchesPromise = await purchesesService.add({_id:order._id})
+    }
+    catch(e){
+        console.log(e)
+    }
+    return addOrderPromise
+}
+
+const  removeAllOrderes = async () =>{
+    const deletePromise = await orderService.removeAll()
+    return deletePromise
 }
 
 const checkItemPayed = async (productID)=>{
@@ -52,4 +89,4 @@ const removeOrder = async(id)=>{
     return await orderService.remove(id)
 }
 
-module.exports = {getAllOrders,getOrderByID,addOrder,removeOrder,checkItemPayed}
+module.exports = {getAllOrders,getOrderByID,addOrder,removeOrder,checkItemPayed,removeAllOrderes,addAllOrderes}
